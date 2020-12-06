@@ -1,0 +1,67 @@
+ .itemform {
+        font-size: 0.9em;
+        border: 1px solid #f1f1f1;
+        background: rgb(219, 219, 219);
+        background: transparent;
+        height: 10%;
+        // width: 100%;
+        position: relative;
+        border-color: #707070;
+        background: none;
+        // margin-left: 20px;
+        border-radius: 5px;
+    }
+    
+    .lbl {
+        //  margin-left: 20px;
+        color: #707070;
+    }
+    
+    .btn-login {
+        color: #5887F9;
+        margin-left: 30px;
+        margin-top: 50px;
+        width: 100px;
+        height: 40px;
+    }
+    
+    .submit-btn {
+        color: #5887F9;
+       // margin-left: 78px;
+       // margin-top: 50px;
+       // width: 100px;
+       // height: 40px;
+    }
+    
+    .validation-errors {
+        //padding-left: 20px;
+        text-align: end;
+        color: var(--ion-color-danger);
+        font-size: small;
+    }
+    
+    ion-input {
+        // width: 270px;
+        width: 100%;
+    }
+    
+    .error {
+        .error-message {
+            text-align: center;
+            color: var(--ion-color-danger);
+            font-size: small;
+            margin-left: 10px;
+        }
+        .success-message {
+            text-align: center;
+            color: var(--ion-color-success);
+            font-size: small;
+            margin-left: 10px;
+        }
+    }
+    
+   
+    
+    .form {
+        margin-top: -5px;
+    }

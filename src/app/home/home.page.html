@@ -1,0 +1,146 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+   <ion-back-button defaultHref="startup" slot="start"></ion-back-button>
+  
+  
+    <ion-title>
+      Simluation App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg" fullscreen>
+
+<form class="form" [formGroup]="validations_form" (ngSubmit)="sendData(validations_form.value)">
+    <ion-grid>
+        <ion-row justify-content-centre>
+            <ion-col align-self-center size="6">
+                <ion-card class="top">
+
+                    <ion-card-title class="welcome">
+                        Device:<br /><span class="Span">farmest17a</span>
+                    </ion-card-title>
+                </ion-card>
+            </ion-col>
+             <ion-col align-self-center size="3">
+                <ion-button color="light" expand= "full" fill="solid">
+        Auto</ion-button>
+            </ion-col>
+             <ion-col align-self-center size="3">
+                <ion-button  color="tertiary" expand= "full" fill="solid">
+        Manual</ion-button>
+            </ion-col>
+        </ion-row>
+       
+        <ion-row justify-content-centre>
+            <ion-col align-self-center>
+
+                <ion-card class="bottom">
+                    <div cards>
+                        <div class="grid-full">
+                            <ion-row>
+                                <ion-col>
+                                    <ion-card class="temp">
+                                       <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
+                                       <ion-item class="roundedInput">
+                                        <ion-label position="floating">Enter Temp</ion-label>
+                                        <ion-input type="number" max="100" formControlName="temp"></ion-input>
+                                        </ion-item>
+                                         <div class="validation-errors">
+                                <ng-container *ngFor="let validation of validation_messages.temp">
+                                    <div class="error-message" *ngIf="validations_form.get('temp').hasError(validation.type) && (validations_form.get('temp').dirty || validations_form.get('temp').touched)">
+                                        {{ validation.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                                        <h3>°C</h3>
+                                        <h1>Temp</h1>
+                                    </ion-card>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-card class="water">
+                                       <ion-item class="roundedInput">
+                                                            <ion-label position="floating">Enter Water</ion-label>
+                                                            <ion-input type="number"
+                max="100" formControlName="water"></ion-input>
+                                                            </ion-item>
+                                                             <div class="validation-errors">
+                                <ng-container *ngFor="let validation of validation_messages.water">
+                                    <div class="error-message" *ngIf="validations_form.get('water').hasError(validation.type) && (validations_form.get('water').dirty || validations_form.get('water').touched)">
+                                        {{ validation.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                                        <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
+                                        <h3>%</h3>
+                                        <h1>Water</h1>
+                                    </ion-card>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-card class="soil">
+                                       <ion-item class="roundedInput">
+                                <ion-label position="floating">Enter Soil</ion-label>
+                                <ion-input type="number"
+                max="100" formControlName="soil" required></ion-input>
+                                </ion-item>
+                                 <div class="validation-errors">
+                                <ng-container *ngFor="let validation of validation_messages.soil">
+                                    <div class="error-message" *ngIf="validations_form.get('soil').hasError(validation.type) && (validations_form.get('soil').dirty || validations_form.get('soil').touched)">
+                                        {{ validation.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                                        <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
+                                        <h3>%</h3>
+                                        <h1>Soil</h1>
+                                    </ion-card>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-card class="humidity">
+                                       <ion-item class="roundedInput">
+                                <ion-label position="floating">Enter Humidity</ion-label>
+                                <ion-input formControlName="humidity" type="number" inputmode="numeric" max="100" required></ion-input>
+                                </ion-item>
+                                 <div class="validation-errors">
+                                <ng-container *ngFor="let validation of validation_messages.humidity">
+                                    <div class="error-message" *ngIf="validations_form.get('humidity').hasError(validation.type) && (validations_form.get('humidity').dirty || validations_form.get('humidity').touched)">
+                                        {{ validation.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                                        <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
+                                        <h3>%</h3>
+                                        <h1>Humidity</h1>
+                                    </ion-card>
+                                </ion-col>
+                                 <ion-col size="7">
+                                    <ion-card class="motor-status">
+                                       
+                                        <h3 class="run">{{isChecker?"Running":""}}</h3>
+                                         <h3 class="h3">{{isChecker?'':"Stopped"}}</h3>
+                                        <h1>Motor Status</h1>
+                                    </ion-card>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+        <ion-col size="6">
+        <ion-button expand= "block" fill="solid">
+        Start</ion-button>
+        </ion-col>
+            <ion-col size="6">
+             <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid" expand= "block" fill="solid">
+        Send</ion-button>
+        </ion-col>
+        </ion-row>
+    </ion-grid>
+    </form>
+    </ion-content>

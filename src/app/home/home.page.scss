@@ -1,0 +1,130 @@
+ion-row {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+[cards] {
+  // justify-content: center;
+  .grid-full ion-col {
+    // flex: 0 0 32%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 50%;
+    padding: 0px 0px;
+    margin-top: 9px;
+    h1 {
+      color: whitesmoke;
+      //margin-top: 100px;
+      text-align: center;
+      //vertical-align: bottom;
+      margin: 0px;
+      display: block;
+      //padding-top: -5px;
+      //  font-family: sans-serif;
+      font-family: "Comfortaa", cursive;
+      font-weight: revert;
+      font-style: normal;
+      font-size: 22px;
+    }
+    .h3 {
+      color: red;
+    }
+    .run {
+      color: rgb(93, 199, 93);
+    }
+    h3 {
+      color: whitesmoke;
+      // margin-left: 50px;
+      // margin-top: 92px;
+      margin-top: 50px;
+      text-align: center;
+      padding: 0px;
+    }
+    ion-icon {
+      font-size: 80px;
+      margin-left: 0;
+      position: absolute;
+    }
+    .temp {
+      background-color: #28e0ae;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .water {
+      background-color: #5d50fe;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .soil {
+      background-color: #0090ff;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .humidity {
+      background-color: #f88f59;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .motor-status {
+      background-color: #263666;
+      justify-content: center;
+      max-height: 100%;
+      max-width: 10000px;
+    }
+  }
+  .row {
+    padding: 0 12px;
+  }
+  .col {
+    padding: 5px 0;
+  }
+  //   justify-content: center;
+}
+// .motor-status {
+//   justify-content: center;
+// }
+.roundedInput {
+  --border-color: var(--ion-color-medium-shade);
+  --border-radius: 5px;
+  --border-width: 0px;
+  --box-shadow: 2px gray;
+  --highlight-height: 0;
+  --background: #f8f9fa;
+  margin-inline-start: 6px;
+  margin-inline-end: 6px;
+  margin-top: 5px;
+}
+.validation-errors {
+  //padding-left: 20px;
+  text-align: end;
+  color: var(--ion-color-danger);
+  font-size: small;
+}
