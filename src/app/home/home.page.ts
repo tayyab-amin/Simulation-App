@@ -1,3 +1,5 @@
+import { registerLocaleData } from "@angular/common";
+import { analyzeAndValidateNgModules } from "@angular/compiler";
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 // import { ReactiveFormsModule } from "@angular/forms";
@@ -10,7 +12,7 @@ import {
 
 import { ActivatedRoute } from "@angular/router";
 
-// import { NavController, NavParams } from "@ionic/angular";
+import { NavController, NavParams } from "@ionic/angular";
 
 export interface MotorStatus {
   status: string;
@@ -27,8 +29,8 @@ export interface Motor {
   styleUrls: ["home.page.scss"],
 })
 export class HomePage {
-  // item: any;
-  // value: any;
+  item: any;
+  value: any;
   devices: any = [];
   validations_form: FormGroup;
   errorMessage: "";
@@ -42,32 +44,27 @@ export class HomePage {
 
   constructor(
     private afs: AngularFirestore,
-    private formBuilder: FormBuilder // private navParams: NavParams, private navCtrl: NavController, private route: ActivatedRoute
-  ) {}
+    private formBuilder: FormBuilder,
+    // private navParams: NavParams,
+    private navCtrl: NavController,
+    private route: ActivatedRoute
+  ) {
+    // this.value = navParams.get("item");
+    // debugger;
+  }
   // motorStatus: Observable<MotorStatus[]>;
   // motorButton: Observable<Motor>;
   // history: any = [];
   ngOnInit(): void {
-    // console.log(Math.random() * 100);
-    // this.value = this.navParams.get(`value`);
-    // console.log(this.item);
+    this.item = localStorage.getItem("name");
     // debugger;
-
-    // this.route.queryParams.subscribe((params) => {
-    //   // if (params) {
-    //   // let queryParams = JSON.parse(this.item);
-    //   console.log(params);
-    //   debugger;
-    //   // }
-    // });
-
-    // debugger;
-
+    /********************************************************************************* */
     this.afs
-      .collection("devices")
+      .collection("devices", (ref) => ref.where("name", "==", this.item))
       .valueChanges()
       .subscribe((devices) => {
         this.devices = devices;
+        debugger;
         // console.log(this.devices);
         // debugger;
       });
@@ -116,7 +113,7 @@ export class HomePage {
   sendData(value) {
     this.afs
       .collection("devices")
-      .doc("farmEST17a")
+      .doc(this.item)
       .update({
         temperature: value.temp,
         soil: value.soil,

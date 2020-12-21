@@ -11,6 +11,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class StartupPage implements OnInit {
   devices: any = [];
+  it: any;
 
   constructor(
     private modalController: ModalController,
@@ -36,9 +37,11 @@ export class StartupPage implements OnInit {
       });
   }
   openPage(item) {
-    console.log(item);
-    console.log(item.name);
-    this.navCtrl.navigateForward([`/home`, { item: item }]);
+    // console.log(item);
+    // console.log(item.name);
+    this.it = localStorage.setItem("name", item.name);
+    console.log(this.it);
+    this.navCtrl.navigateForward([`/home`]);
     // debugger;
   }
 }
