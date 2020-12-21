@@ -1,98 +1,103 @@
-
-
 <ion-content color="light">
-<ion-item color="primary">
-<ion-label >Add Device</ion-label>
-<!-- <ion-button  fill="outline" size="small" slot="end" (click)="Close()"> -->
-<ion-icon name="close-outline"  (click)="Close()"></ion-icon>
+  <ion-item color="primary">
+    <ion-label>Add Device</ion-label>
+    <!-- <ion-button  fill="outline" size="small" slot="end" (click)="Close()"> -->
+    <ion-icon name="close-outline" (click)="Close()"></ion-icon>
+  </ion-item>
+  <form
+    class="form"
+    [formGroup]="validations_form"
+    (ngSubmit)="tryAdd(validations_form.value)"
+  >
+    <ion-grid>
+      <ion-list>
+        <ion-row justify-content-centre>
+          <ion-col align-self-center>
+            <div text-centre></div>
+            <div padding>
+              <ion-label class="lbl">Name*</ion-label>
+              <ion-item class="itemform" lines="none">
+                <ion-input
+                  formControlName="devicename"
+                  type="text "
+                  placeholder="Name "
+                  ion
+                ></ion-input>
+              </ion-item>
+              <div class="validation-errors">
+                <ng-container
+                  *ngFor="let validation of validation_messages.devicename"
+                >
+                  <div
+                    class="error-message"
+                    *ngIf="validations_form.get('devicename').hasError(validation.type) && (validations_form.get('devicename').dirty || validations_form.get('devicename').touched)"
+                  >
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <br />
 
-</ion-item>
- <form  class="form" [formGroup]="validations_form" (ngSubmit)="tryAdd(validations_form.value)">
-        <ion-grid>
-            <ion-list>
-                <ion-row justify-content-centre>
-                    <ion-col align-self-center>
+              <ion-label class="lbl">Sensor 1</ion-label>
+              <ion-item class="itemform" lines="none">
+                <ion-input
+                  type="text "
+                  placeholder="Temperature "
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <div class="validation-errors"></div>
+              <br />
 
-                        <div text-centre>
+              <ion-label class="lbl">Sensor 2</ion-label>
 
-                        </div>
-                        <div padding>
-                            <ion-label class="lbl">Name*</ion-label>
-                            <ion-item class="itemform" lines="none">
+              <ion-item class="itemform" lines="none">
+                <ion-input
+                  type="text"
+                  placeholder=" Humidity"
+                  autocomplete="disabled"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <div class="validation-errors"></div>
+              <br />
+              <ion-label class="lbl">Sensor 3</ion-label>
 
-                                <ion-input  formControlName="devicename" type="text " placeholder="Name " ion></ion-input>
-                            </ion-item>
-                            <div class="validation-errors">
-                                <ng-container *ngFor="let validation of validation_messages.devicename">
-                                    <div class="error-message" *ngIf="validations_form.get('devicename').hasError(validation.type) && (validations_form.get('devicename').dirty || validations_form.get('devicename').touched)">
-                                        {{ validation.message }}
-                                    </div>
-                                </ng-container>
-                            </div>
-                            <br>
+              <ion-item class="itemform" lines="none">
+                <ion-input
+                  type="text"
+                  placeholder=" Soil Moisture"
+                  autocomplete="disabled"
+                  disabled
+                ></ion-input>
+              </ion-item>
+              <div class="validation-errors"></div>
+              <br />
+              <ion-label class="lbl">Sensor 4</ion-label>
 
-                            <ion-label class="lbl">Sensor 1</ion-label>
-                            <ion-item class="itemform" lines="none">
-
-                                <ion-input type="text " placeholder="Temperature " disabled></ion-input>
-                            </ion-item>
-                            <div class="validation-errors">
-                               
-                            </div>
-                            <br>
-
-
-                            <ion-label class="lbl">Sensor 2</ion-label>
-
-                            <ion-item class="itemform " lines="none">
-
-                                <ion-input type="text" placeholder=" Humidity" autocomplete="disabled" disabled></ion-input>
-
-                            </ion-item>
-                            <div class="validation-errors">
-                                
-                            </div>
-                            <br>
-                            <ion-label class="lbl">Sensor 3</ion-label>
-
-                            <ion-item class="itemform " lines="none">
-
-                                <ion-input type="text" placeholder=" Soil Moisture" autocomplete="disabled" disabled></ion-input>
-
-                            </ion-item>
-  <div class="validation-errors">
-                                
-                            </div>
-                            <br>
-                             <ion-label class="lbl">Sensor 4</ion-label>
-
-                            <ion-item class="itemform " lines="none">
-
-                                <ion-input type="text" placeholder=" Water Level" autocomplete="disabled" disabled></ion-input>
-
-                            </ion-item>
-                        </div>
-                    </ion-col>
-                </ion-row>
-               <ion-col class="ion-text-center" size="12">
-               
-<ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid" expand="block" color="secondary" fill="solid"><span class="txt-register">ADD</span></ion-button>
-               
-                </ion-col>
-
-
-
-
-
-
-
-
-
-
-
-            </ion-list>
-        </ion-grid>
-
-    </form>
-
+              <ion-item class="itemform" lines="none">
+                <ion-input
+                  type="text"
+                  placeholder=" Water Level"
+                  autocomplete="disabled"
+                  disabled
+                ></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-col class="ion-text-center" size="12">
+          <ion-button
+            class="submit-btn"
+            type="submit"
+            [disabled]="!validations_form.valid"
+            expand="block"
+            color="secondary"
+            fill="solid"
+            ><span class="txt-register">ADD</span></ion-button
+          >
+        </ion-col>
+      </ion-list>
+    </ion-grid>
+  </form>
 </ion-content>

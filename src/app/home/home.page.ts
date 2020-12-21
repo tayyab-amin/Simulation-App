@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/firestore";
+// import { ReactiveFormsModule } from "@angular/forms";
 import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from "@angular/fire/firestore";
-import { ReactiveFormsModule} from '@angular/forms';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from "@angular/forms";
+
+import { ActivatedRoute } from "@angular/router";
+
+// import { NavController, NavParams } from "@ionic/angular";
 
 export interface MotorStatus {
   status: string;
@@ -16,50 +22,76 @@ export interface Motor {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
 export class HomePage {
-   validations_form: FormGroup;
-    errorMessage: '';
-   successMessage: string = '';
-   validation_messages = {
-    temp: [
-      { type: 'required', message: 'Temp is required.' },
-    ],
-    soil: [
-      { type: 'required', message: 'Soil is required.' },
-     
-    ],
-    humidity: [
-      { type: 'required', message: 'Humidity is required.' },
-     
-    ],
-     water: [
-      { type: 'required', message: 'Water is required.' }
-    ]
+  // item: any;
+  // value: any;
+  devices: any = [];
+  validations_form: FormGroup;
+  errorMessage: "";
+  successMessage: string = "";
+  validation_messages = {
+    temp: [{ type: "required", message: "Temp is required." }],
+    soil: [{ type: "required", message: "Soil is required." }],
+    humidity: [{ type: "required", message: "Humidity is required." }],
+    water: [{ type: "required", message: "Water is required." }],
   };
 
-  constructor( private afs: AngularFirestore, private formBuilder: FormBuilder,) {}
+  constructor(
+    private afs: AngularFirestore,
+    private formBuilder: FormBuilder // private navParams: NavParams, private navCtrl: NavController, private route: ActivatedRoute
+  ) {}
   // motorStatus: Observable<MotorStatus[]>;
   // motorButton: Observable<Motor>;
-  history: any = [];
- ngOnInit(): void {
+  // history: any = [];
+  ngOnInit(): void {
+    // console.log(Math.random() * 100);
+    // this.value = this.navParams.get(`value`);
+    // console.log(this.item);
+    // debugger;
+
+    // this.route.queryParams.subscribe((params) => {
+    //   // if (params) {
+    //   // let queryParams = JSON.parse(this.item);
+    //   console.log(params);
+    //   debugger;
+    //   // }
+    // });
+
+    // debugger;
+
+    this.afs
+      .collection("devices")
+      .valueChanges()
+      .subscribe((devices) => {
+        this.devices = devices;
+        // console.log(this.devices);
+        // debugger;
+      });
+
     this.validations_form = this.formBuilder.group({
-      temp: new FormControl("",  Validators.compose([Validators.required, Validators.pattern("[0-9]*")])),
-      soil: new FormControl('', Validators.compose([Validators.required,Validators.pattern("[0-9]*")])),
-       humidity: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern("[0-9]*")
-       
-      ])),
-       water: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern("[0-9]*")
-       
-      ])),
+      temp: new FormControl(
+        "",
+        Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
+      ),
+      soil: new FormControl(
+        "",
+        Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
+      ),
+      humidity: new FormControl(
+        "",
+        Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
+      ),
+
+      water: new FormControl(
+        "",
+        Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
+      ),
     });
+
     //  this.statusCollection = this.afs.collection<MotorStatus>(
     //   `devices/farmEST17a/history`,
     //   (ref) => ref.orderBy('time', 'desc')
@@ -76,26 +108,24 @@ export class HomePage {
     //   .valueChanges();
     // this.motorButton.subscribe((state) => {
     //   // this.isChecker = state.motorIsrunning;
-      // console.log('On value Observe:' + this.isChecker);
-      // debugger;
+    // console.log('On value Observe:' + this.isChecker);
+    // debugger;
     // });
- }
+  }
 
-
- sendData(value){
- this.afs
+  sendData(value) {
+    this.afs
       .collection("devices")
       .doc("farmEST17a")
       .update({
         temperature: value.temp,
         soil: value.soil,
-        water_level:value.water,
-        humidity:value.humidity
+        water_level: value.water,
+        humidity: value.humidity,
       })
       .then(() => {
         this.successMessage = "Auto Set Successfully.";
       });
+    this.validations_form.reset();
   }
-
- 
 }
