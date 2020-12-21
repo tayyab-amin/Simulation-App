@@ -30,7 +30,10 @@ export interface Motor {
 })
 export class HomePage {
   item: any;
-  value: any;
+  // value: any;
+  // myValue: any;
+  // myGroup: any;
+  // isToggled: boolean;
   devices: any = [];
   validations_form: FormGroup;
   errorMessage: "";
@@ -49,6 +52,7 @@ export class HomePage {
     private navCtrl: NavController,
     private route: ActivatedRoute
   ) {
+    // this.isToggled = false;
     // this.value = navParams.get("item");
     // debugger;
   }
@@ -57,6 +61,13 @@ export class HomePage {
   // history: any = [];
   ngOnInit(): void {
     this.item = localStorage.getItem("name");
+
+    /************************************************************************* */
+
+    // this.myGroup = new FormGroup({
+    //   setauto: new FormControl(),
+    // });
+
     // debugger;
     /********************************************************************************* */
     this.afs
@@ -64,7 +75,7 @@ export class HomePage {
       .valueChanges()
       .subscribe((devices) => {
         this.devices = devices;
-        debugger;
+        // debugger;
         // console.log(this.devices);
         // debugger;
       });
@@ -125,4 +136,13 @@ export class HomePage {
       });
     this.validations_form.reset();
   }
+  // myChange($event) {
+  //   // this.myValue = this.value;
+  //   // console.log(this.myValue);
+  //   console.log($event);
+  //   // debugger;
+  // }
+  // public notify() {
+  //   console.log("Toggled: " + this.isToggled);
+  // }
 }
