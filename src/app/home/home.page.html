@@ -22,28 +22,33 @@
           </ion-card>
         </ion-col>
         <!-- --------------------------------------------------------------------------------- -->
-
+        <!-- 
         <ion-row justify-content-centre>
           <ion-col align-self-center size="3">
-            <!-- <div [formGroup]="myGroup"> -->
-            <!-- <ion-toggle
+            <div [formGroup]="myGroup">
+              <ion-toggle
                 [(ngModel)]="myValue"
                 formControlName="setauto"
                 (ionChange)="myChange($event)"
-              ></ion-toggle> -->
-            <!-- <ion-toggle (ionChange)="notify(value)"></ion-toggle> -->
-            <!-- </div> -->
+              ></ion-toggle>
+              <ion-toggle (ionChange)="notify(value)"></ion-toggle>
+            </div>
             <ion-toggle></ion-toggle>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <!-- -------------------------------------------------------------- -->
-        <!-- <ion-col align-self-center size="3">
-          <ion-button color="light" expand="full" fill="solid">
-            Auto</ion-button
+        <ion-col align-self-center size="3">
+          <ion-button
+            color="light"
+            expand="full"
+            fill="solid"
+            (click)="setAuto()"
+          >
+            {{ setValue ? 'Manual' : 'Auto'}}</ion-button
           >
         </ion-col>
-        <ion-col align-self-center size="3">
+        <!-- <ion-col align-self-center size="3">
           <ion-button color="tertiary" expand="full" fill="solid">
             Manual</ion-button
           >
@@ -68,7 +73,7 @@
                   <ion-col>
                     <ion-card class="temp">
                       <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
-                      <ion-item class="roundedInput">
+                      <ion-item class="roundedInput" *ngIf="setValue">
                         <ion-label position="floating">Enter Temp</ion-label>
                         <ion-input
                           type="number"
@@ -76,7 +81,7 @@
                           formControlName="temp"
                         ></ion-input>
                       </ion-item>
-                      <div class="validation-errors">
+                      <div class="validation-errors" *ngIf="setValue">
                         <ng-container
                           *ngFor="let validation of validation_messages.temp"
                         >
@@ -97,7 +102,7 @@
                   </ion-col>
                   <ion-col>
                     <ion-card class="water">
-                      <ion-item class="roundedInput">
+                      <ion-item class="roundedInput" *ngIf="setValue">
                         <ion-label position="floating">Enter Water</ion-label>
                         <ion-input
                           type="number"
@@ -105,7 +110,7 @@
                           formControlName="water"
                         ></ion-input>
                       </ion-item>
-                      <div class="validation-errors">
+                      <div class="validation-errors" *ngIf="setValue">
                         <ng-container
                           *ngFor="let validation of validation_messages.water"
                         >
@@ -127,7 +132,7 @@
                   </ion-col>
                   <ion-col>
                     <ion-card class="soil">
-                      <ion-item class="roundedInput">
+                      <ion-item class="roundedInput" *ngIf="setValue">
                         <ion-label position="floating">Enter Soil</ion-label>
                         <ion-input
                           type="number"
@@ -136,7 +141,7 @@
                           required
                         ></ion-input>
                       </ion-item>
-                      <div class="validation-errors">
+                      <div class="validation-errors" *ngIf="setValue">
                         <ng-container
                           *ngFor="let validation of validation_messages.soil"
                         >
@@ -158,7 +163,7 @@
                   </ion-col>
                   <ion-col>
                     <ion-card class="humidity">
-                      <ion-item class="roundedInput">
+                      <ion-item class="roundedInput" *ngIf="setValue">
                         <ion-label position="floating"
                           >Enter Humidity</ion-label
                         >
@@ -170,7 +175,7 @@
                           required
                         ></ion-input>
                       </ion-item>
-                      <div class="validation-errors">
+                      <div class="validation-errors" *ngIf="setValue">
                         <ng-container
                           *ngFor="let validation of validation_messages.humidity"
                         >
@@ -192,8 +197,10 @@
                   </ion-col>
                   <ion-col size="7">
                     <ion-card class="motor-status">
-                      <h3 class="run">{{isChecker?"Running":""}}</h3>
-                      <h3 class="h3">{{isChecker?'':"Stopped"}}</h3>
+                      <h3 class="run">
+                        {{ motorStatus ? 'Running' : 'Stopped' }}
+                      </h3>
+                      <!-- <h3 class="h3">{{isChecker?'':"Stopped"}}</h3> -->
                       <h1>Motor Status</h1>
                     </ion-card>
                   </ion-col>
@@ -205,7 +212,9 @@
       </ion-row>
       <ion-row>
         <ion-col size="6">
-          <ion-button expand="block" fill="solid"> Start</ion-button>
+          <ion-button expand="block" fill="solid" (click)="setMotorStatus()">
+            {{ motorStatus ? 'Stop' : 'Start' }}</ion-button
+          >
         </ion-col>
         <ion-col size="6">
           <ion-button

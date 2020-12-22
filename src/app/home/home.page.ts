@@ -32,8 +32,8 @@ export class HomePage {
   item: any;
   // value: any;
   // myValue: any;
-  // myGroup: any;
-  // isToggled: boolean;
+  motorStatus: boolean;
+  setValue: boolean;
   devices: any = [];
   validations_form: FormGroup;
   errorMessage: "";
@@ -135,6 +135,17 @@ export class HomePage {
         this.successMessage = "Auto Set Successfully.";
       });
     this.validations_form.reset();
+  }
+
+  setAuto() {
+    this.setValue = !this.setValue;
+    console.log(this.setValue);
+    // console.log("here");
+  }
+
+  setMotorStatus() {
+    this.motorStatus = !this.motorStatus;
+    console.log(this.motorStatus);
   }
   // myChange($event) {
   //   // this.myValue = this.value;
