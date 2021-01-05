@@ -75,9 +75,6 @@ export class HomePage {
       .valueChanges()
       .subscribe((devices) => {
         this.devices = devices;
-        // debugger;
-        // console.log(this.devices);
-        // debugger;
       });
 
     this.validations_form = this.formBuilder.group({

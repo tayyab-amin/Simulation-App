@@ -45,7 +45,7 @@
             fill="solid"
             (click)="setAuto()"
           >
-            {{ setValue ? 'Manual' : 'Auto'}}</ion-button
+            {{ setValue ? 'Auto' : 'Manual'}}</ion-button
           >
         </ion-col>
         <!-- <ion-col align-self-center size="3">
@@ -210,10 +210,10 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="setValue">
         <ion-col size="6">
           <ion-button expand="block" fill="solid" (click)="setMotorStatus()">
-            {{ motorStatus ? 'Stop' : 'Start' }}</ion-button
+            {{ motorStatus ? 'Stop Motor' : 'Start Motor' }}</ion-button
           >
         </ion-col>
         <ion-col size="6">
