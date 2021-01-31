@@ -21,49 +21,14 @@
             </ion-card-title>
           </ion-card>
         </ion-col>
-        <!-- --------------------------------------------------------------------------------- -->
-        <!-- 
-        <ion-row justify-content-centre>
-          <ion-col align-self-center size="3">
-            <div [formGroup]="myGroup">
-              <ion-toggle
-                [(ngModel)]="myValue"
-                formControlName="setauto"
-                (ionChange)="myChange($event)"
-              ></ion-toggle>
-              <ion-toggle (ionChange)="notify(value)"></ion-toggle>
-            </div>
-            <ion-toggle></ion-toggle>
-          </ion-col>
-        </ion-row> -->
 
-        <!-- -------------------------------------------------------------- -->
         <ion-col align-self-center size="3">
-          <ion-button
-            color="light"
-            expand="full"
-            fill="solid"
-            (click)="setAuto()"
-          >
+          <ion-button expand="block" fill="solid" (click)="setAuto()">
             {{ setValue ? 'Auto' : 'Manual'}}</ion-button
           >
         </ion-col>
-        <!-- <ion-col align-self-center size="3">
-          <ion-button color="tertiary" expand="full" fill="solid">
-            Manual</ion-button
-          >
-        </ion-col> -->
-        <!-- -------------------------------------------------------------------------------------- -->
       </ion-row>
-      <!-- ----------------------------------------------------------------------------------------- -->
-      <!-- ---------------------------------------------------------------------------------------------------- -->
-      <!-- <ion-row justify-content-centre>
-        <ion-col align-self-center size="3">
-          <ion-checkbox color="primary"></ion-checkbox>
-          <ion-label>Auto</ion-label>
-        </ion-col>
-      </ion-row> -->
-      <!-- ------------------------------------------------------------------------------------ -->
+
       <ion-row justify-content-centre>
         <ion-col align-self-center>
           <ion-card class="bottom">
@@ -72,7 +37,6 @@
                 <ion-row>
                   <ion-col>
                     <ion-card class="temp">
-                      <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
                       <ion-item class="roundedInput" *ngIf="setValue">
                         <ion-label position="floating">Enter Temp</ion-label>
                         <ion-input
@@ -123,7 +87,6 @@
                         </ng-container>
                       </div>
 
-                      <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
                       <h3 *ngFor="let devices of devices">
                         {{devices.water_level}}%
                       </h3>
@@ -154,10 +117,7 @@
                         </ng-container>
                       </div>
 
-                      <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
-                      <h3 *ngFor="let devices of devices">
-                        {{devices.soil}} %
-                      </h3>
+                      <h3 *ngFor="let devices of devices">{{devices.soil}}%</h3>
                       <h1>Soil</h1>
                     </ion-card>
                   </ion-col>
@@ -188,7 +148,6 @@
                         </ng-container>
                       </div>
 
-                      <!-- <ion-input type="text" placeholder="Awesome Input"></ion-input> -->
                       <h3 *ngFor="let devices of devices">
                         {{devices.humidity}}%
                       </h3>
@@ -200,7 +159,6 @@
                       <h3 class="run">
                         {{ motorStatus ? 'Running' : 'Stopped' }}
                       </h3>
-                      <!-- <h3 class="h3">{{isChecker?'':"Stopped"}}</h3> -->
                       <h1>Motor Status</h1>
                     </ion-card>
                   </ion-col>

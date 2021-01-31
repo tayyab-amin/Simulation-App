@@ -1,8 +1,8 @@
-import { registerLocaleData } from "@angular/common";
-import { analyzeAndValidateNgModules } from "@angular/compiler";
+// import { registerLocaleData } from "@angular/common";
+// import { analyzeAndValidateNgModules } from "@angular/compiler";
+import { conditionallyCreateMapObjectLiteral } from "@angular/compiler/src/render3/view/util";
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-// import { ReactiveFormsModule } from "@angular/forms";
 import {
   FormGroup,
   FormBuilder,
@@ -13,6 +13,7 @@ import {
 import { ActivatedRoute } from "@angular/router";
 
 import { NavController, NavParams } from "@ionic/angular";
+// import { runInThisContext } from "vm";
 
 export interface MotorStatus {
   status: string;
@@ -30,8 +31,6 @@ export interface Motor {
 })
 export class HomePage {
   item: any;
-  // value: any;
-  // myValue: any;
   motorStatus: boolean;
   setValue: boolean;
   devices: any = [];
@@ -48,28 +47,12 @@ export class HomePage {
   constructor(
     private afs: AngularFirestore,
     private formBuilder: FormBuilder,
-    // private navParams: NavParams,
     private navCtrl: NavController,
     private route: ActivatedRoute
-  ) {
-    // this.isToggled = false;
-    // this.value = navParams.get("item");
-    // debugger;
-  }
-  // motorStatus: Observable<MotorStatus[]>;
-  // motorButton: Observable<Motor>;
-  // history: any = [];
+  ) {}
   ngOnInit(): void {
     this.item = localStorage.getItem("name");
 
-    /************************************************************************* */
-
-    // this.myGroup = new FormGroup({
-    //   setauto: new FormControl(),
-    // });
-
-    // debugger;
-    /********************************************************************************* */
     this.afs
       .collection("devices", (ref) => ref.where("name", "==", this.item))
       .valueChanges()
@@ -96,26 +79,6 @@ export class HomePage {
         Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
       ),
     });
-
-    //  this.statusCollection = this.afs.collection<MotorStatus>(
-    //   `devices/farmEST17a/history`,
-    //   (ref) => ref.orderBy('time', 'desc')
-    // );
-    // debugger;
-    // this.motorStatus = this.statusCollection.valueChanges();
-
-    // this.motorStatus.subscribe((history) => {
-    //   // debugger;
-    //   this.history = history;
-    // });
-    // this.motorButton = this.afs
-    //   .doc<Motor>(`devices/farmEST17a`)
-    //   .valueChanges();
-    // this.motorButton.subscribe((state) => {
-    //   // this.isChecker = state.motorIsrunning;
-    // console.log('On value Observe:' + this.isChecker);
-    // debugger;
-    // });
   }
 
   sendData(value) {
@@ -134,23 +97,45 @@ export class HomePage {
     this.validations_form.reset();
   }
 
+  setData() {
+    if (this.setValue) {
+      console.log("true here");
+    } else {
+      console.log("false here");
+      let autoTemp = Math.random() * 100;
+      autoTemp = autoTemp / 2;
+      autoTemp = Math.round(autoTemp);
+      let autoHumidity = Math.random() * 100;
+      autoHumidity = Math.round(autoHumidity);
+      let autoSoil = Math.random() * 100;
+      autoSoil = Math.round(autoSoil);
+      let autoWater = Math.random() * 100;
+      autoWater = Math.round(autoWater);
+      console.log(autoHumidity, autoSoil, autoTemp, autoWater);
+      this.afs
+        .collection("devices")
+        .doc(this.item)
+        .update({
+          temperature: autoTemp,
+          soil: autoSoil,
+          water_level: autoWater,
+          humidity: autoHumidity,
+        })
+        .then(() => {
+          this.successMessage = "Auto Set Successfully.";
+        });
+    }
+  }
+
   setAuto() {
     this.setValue = !this.setValue;
-    console.log(this.setValue);
-    // console.log("here");
+    setInterval(() => {
+      this.setData();
+    }, 10000);
   }
 
   setMotorStatus() {
     this.motorStatus = !this.motorStatus;
     console.log(this.motorStatus);
   }
-  // myChange($event) {
-  //   // this.myValue = this.value;
-  //   // console.log(this.myValue);
-  //   console.log($event);
-  //   // debugger;
-  // }
-  // public notify() {
-  //   console.log("Toggled: " + this.isToggled);
-  // }
 }

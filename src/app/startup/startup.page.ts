@@ -37,11 +37,8 @@ export class StartupPage implements OnInit {
       });
   }
   openPage(item) {
-    // console.log(item);
-    // console.log(item.name);
     this.it = localStorage.setItem("name", item.name);
     console.log(this.it);
     this.navCtrl.navigateForward([`/home`]);
-    // debugger;
   }
 }
